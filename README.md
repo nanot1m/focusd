@@ -13,7 +13,7 @@ Default paused domains:
 
 ## Screenshots
 
-![Focusd pause screen](screenshots/pause.png)
+![Focusd pause demo](screenshots/focusd-demo.gif)
 
 ![Focusd settings screen](screenshots/settings.png)
 
