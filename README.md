@@ -4,6 +4,8 @@ Focusd is a Chrome extension that helps you stay focused by adding a short pause
 
 When you navigate to a configured domain, Focusd replaces the tab with a calm interstitial. The water circle fills for three seconds, giving you a moment to decide if you really want to visit that distracting site right now. You can continue intentionally, or leave and return to what you were doing.
 
+Focusd is free forever.
+
 Default paused domains:
 
 - `x.com`
@@ -22,6 +24,7 @@ Default paused domains:
 - Subdomain matching, for example `instagram.com` matches `www.instagram.com`
 - Three-second decision pause before continuing
 - Helps interrupt automatic visits to distracting sites
+- Free forever
 - Animated ocean-style WebGPU water button
 - CSS fallback for browsers without WebGPU
 - Local settings page stored with `chrome.storage.sync`

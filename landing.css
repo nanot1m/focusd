@@ -125,6 +125,22 @@ h1 {
   margin-top: 34px;
 }
 
+.free-mark {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  min-height: 32px;
+  margin-top: 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0 13px;
+  color: var(--blue-dark);
+  background: rgb(255 255 255 / 34%);
+  backdrop-filter: blur(18px) saturate(150%);
+  font-size: 14px;
+  line-height: 1;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
