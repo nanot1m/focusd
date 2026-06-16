@@ -233,12 +233,12 @@ h1 {
   overflow: hidden;
 }
 
-.demo-video video {
+.demo-video iframe {
   display: block;
   width: 100%;
-  max-width: 100%;
   height: auto;
-  aspect-ratio: 1280 / 832;
+  aspect-ratio: 16 / 9;
+  border: 0;
   background: #d7e7ef;
 }
 
