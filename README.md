@@ -1,8 +1,8 @@
 # Focusd
 
-Focusd is a Chrome extension that adds a short pause before opening distracting websites.
+Focusd is a Chrome extension that helps you stay focused by adding a short pause before distracting websites open.
 
-When you navigate to a configured domain, the tab is replaced with a calm interstitial. The water circle fills for three seconds, then becomes the button to continue. You can leave at any time.
+When you navigate to a configured domain, Focusd replaces the tab with a calm interstitial. The water circle fills for three seconds, giving you a moment to decide if you really want to visit that distracting site right now. You can continue intentionally, or leave and return to what you were doing.
 
 Default paused domains:
 
@@ -20,7 +20,8 @@ Default paused domains:
 - Manifest V3 Chrome extension
 - Configurable domain list
 - Subdomain matching, for example `instagram.com` matches `www.instagram.com`
-- Three-second intentional pause before continuing
+- Three-second decision pause before continuing
+- Helps interrupt automatic visits to distracting sites
 - Animated ocean-style WebGPU water button
 - CSS fallback for browsers without WebGPU
 - Local settings page stored with `chrome.storage.sync`
@@ -49,9 +50,9 @@ Do not include paths. Focusd normalizes entries such as `https://example.com/fee
 
 ## How It Works
 
-Focusd listens for top-level navigations with `chrome.webNavigation`. If the destination hostname matches your pause list, the tab is redirected to the extension interstitial.
+Focusd listens for top-level navigations with `chrome.webNavigation`. If the destination hostname matches your pause list, the tab is redirected to the extension interstitial instead of opening the distracting site immediately.
 
-The interstitial waits three seconds before enabling the water circle as the `Open` button. Choosing `Open` temporarily allows that exact navigation, then redirects the tab to the original URL.
+The interstitial waits three seconds before enabling the water circle as the `Open` button. That short pause is the core behavior: it gives you time to make a conscious decision instead of following the impulse automatically. Choosing `Open` temporarily allows that exact navigation, then redirects the tab to the original URL.
 
 ## Permissions
 
