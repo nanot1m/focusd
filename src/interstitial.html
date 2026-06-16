@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Focusd</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="page calm-page">
+    <main class="prompt is-waiting" aria-live="polite">
+      <h1 class="headline" id="headline">
+        <span class="headline-text is-active">Take a breath</span>
+        <span class="headline-text" id="reflection">Still want this?</span>
+      </h1>
+      <p class="lede"><span id="target"></span></p>
+      <div class="decision">
+        <button id="continue" class="countdown" type="button" disabled aria-label="Open after countdown" data-state="waiting">
+          <canvas id="water" class="water-canvas" width="236" height="236" aria-hidden="true"></canvas>
+          <span class="liquid" aria-hidden="true"></span>
+          <span id="count"></span>
+        </button>
+      </div>
+      <div class="actions">
+        <button id="cancel" class="secondary" type="button">Leave</button>
+      </div>
+    </main>
+    <script src="water.js"></script>
+    <script src="interstitial.js"></script>
+  </body>
+</html>

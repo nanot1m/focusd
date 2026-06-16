@@ -1,0 +1,685 @@
+:root {
+  color-scheme: light dark;
+  --bg-a: #f7f1df;
+  --bg-b: #d9efe7;
+  --bg-c: #e8e0f2;
+  --text: #1f2521;
+  --muted: #667168;
+  --line: rgb(255 255 255 / 62%);
+  --primary: #2f6f5d;
+  --primary-text: #ffffff;
+  --surface: rgb(255 255 255 / 20%);
+  --surface-strong: rgb(255 255 255 / 82%);
+  --shadow: 0 34px 100px rgb(20 54 76 / 22%);
+  --focus-ring: rgb(47 111 93 / 28%);
+  --flow-a: rgb(255 255 255 / 54%);
+  --flow-b: rgb(83 151 130 / 18%);
+  --flow-c: rgb(118 98 154 / 14%);
+  --live-glow: rgb(47 111 93 / 24%);
+  --font-display: ui-rounded, "SF Pro Rounded", "Avenir Next", "Nunito Sans", system-ui, sans-serif;
+  --font-body: "Avenir Next", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg-a);
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  min-width: 320px;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.calm-page {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(120deg, var(--bg-a), var(--bg-b), var(--bg-c), var(--bg-a));
+  background-size: 260% 260%;
+  animation: flowGradient 20s ease-in-out infinite;
+}
+
+.calm-page::before {
+  content: "";
+  position: fixed;
+  inset: -28%;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 18% 28%, var(--flow-a), transparent 38%),
+    radial-gradient(ellipse at 72% 22%, var(--flow-b), transparent 42%),
+    radial-gradient(ellipse at 42% 78%, var(--flow-c), transparent 44%);
+  filter: blur(22px);
+  transform: translate3d(0, 0, 0);
+  animation: flowDrift 24s ease-in-out infinite alternate;
+}
+
+.calm-page::after {
+  content: "";
+  position: fixed;
+  inset: -18%;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgb(255 255 255 / 22%), transparent 34%),
+    radial-gradient(ellipse at 78% 62%, rgb(47 111 93 / 12%), transparent 38%);
+  filter: blur(34px);
+  animation: flowDriftReverse 30s ease-in-out infinite alternate;
+}
+
+.prompt,
+.settings {
+  position: relative;
+  overflow: hidden;
+  width: min(100%, 480px);
+  background:
+    linear-gradient(135deg, rgb(255 255 255 / 52%), rgb(255 255 255 / 10%)),
+    radial-gradient(ellipse at 20% 0%, rgb(255 255 255 / 50%), transparent 44%),
+    var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 88%),
+    inset 1px 0 0 rgb(255 255 255 / 34%),
+    inset -1px 0 0 rgb(255 255 255 / 18%),
+    inset 0 -28px 58px rgb(42 162 230 / 10%),
+    var(--shadow);
+  backdrop-filter: blur(42px) saturate(180%) contrast(112%) brightness(108%);
+  animation: fadeIn 520ms ease both;
+}
+
+.prompt::before,
+.settings::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 7px;
+  background:
+    radial-gradient(ellipse at 16% 7%, rgb(255 255 255 / 76%), transparent 32%),
+    radial-gradient(ellipse at 86% 82%, rgb(68 177 255 / 22%), transparent 40%),
+    linear-gradient(112deg, transparent 14%, rgb(255 255 255 / 42%) 38%, rgb(255 255 255 / 10%) 46%, transparent 62%);
+  mix-blend-mode: screen;
+  opacity: 0.92;
+  transform: translate3d(-2%, 0, 0);
+  animation: glassSheen 9s ease-in-out infinite alternate;
+}
+
+.prompt::after,
+.settings::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgb(255 255 255 / 42%), transparent 38%),
+    radial-gradient(ellipse at 50% 112%, rgb(28 145 224 / 12%), transparent 52%);
+}
+
+.prompt > *,
+.settings > * {
+  position: relative;
+  z-index: 2;
+}
+
+.prompt {
+  text-align: center;
+  transition: padding 420ms ease;
+}
+
+.headline {
+  position: relative;
+  min-height: 38px;
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 33px;
+  font-weight: 400;
+  line-height: 1.14;
+  letter-spacing: 0.01em;
+  animation: floatIn 520ms ease both;
+}
+
+.headline-text {
+  display: block;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 900ms ease,
+    transform 900ms ease;
+}
+
+.headline-text + .headline-text {
+  position: absolute;
+  inset: 0;
+}
+
+.headline-text.is-active,
+.headline.is-swapped .headline-text + .headline-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.headline.is-swapped .headline-text.is-active {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.lede {
+  margin: 0 0 28px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  animation: floatIn 620ms ease 80ms both;
+}
+
+.lede span {
+  color: var(--text);
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}
+
+.decision {
+  --decision-size: 118px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--decision-size);
+  height: var(--decision-size);
+  margin: 0 auto;
+}
+
+.decision::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border: 1px solid rgb(47 111 93 / 16%);
+  border-radius: 999px;
+  pointer-events: none;
+  animation: ripple 2.8s ease-in-out infinite;
+}
+
+.prompt.is-ready .decision::before {
+  opacity: 0;
+  animation: none;
+}
+
+.countdown {
+  position: relative;
+  display: grid;
+  place-items: center;
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  border: 1px solid rgb(47 111 93 / 28%);
+  border-radius: 999px;
+  overflow: hidden;
+  color: var(--primary);
+  font-size: 30px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  background: var(--surface-strong);
+  box-shadow:
+    inset 0 0 0 8px rgb(255 255 255 / 34%),
+    0 0 0 0 var(--live-glow),
+    0 16px 42px rgb(47 111 93 / 12%);
+  animation:
+    breathe 2.8s ease-in-out infinite,
+    glowPulse 2.8s ease-in-out infinite;
+  transition:
+    opacity 360ms ease,
+    transform 420ms ease,
+    box-shadow 180ms ease;
+}
+
+.countdown:disabled {
+  cursor: wait;
+  opacity: 1;
+}
+
+.countdown:not(:disabled) {
+  cursor: pointer;
+}
+
+.countdown:not(:disabled):hover {
+  transform: translateY(-1px) scale(1.025);
+}
+
+.countdown .liquid {
+  position: absolute;
+  inset: auto -18% -8%;
+  height: 0%;
+  background:
+    radial-gradient(ellipse at 30% 12%, rgb(255 255 255 / 48%), transparent 24%),
+    linear-gradient(180deg, rgb(88 196 255 / 86%), rgb(15 81 183 / 90%));
+  border-radius: 45% 48% 0 0;
+  animation:
+    liquidFill 3s linear forwards,
+    liquidWave 2.4s ease-in-out infinite alternate;
+  transform-origin: center bottom;
+}
+
+.water-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.water-canvas.is-active {
+  opacity: 1;
+}
+
+.countdown.has-webgpu .liquid {
+  display: none;
+}
+
+.countdown .liquid::before,
+.countdown .liquid::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -12px;
+  width: 150%;
+  height: 24px;
+  border-radius: 45%;
+  background: rgb(211 242 255 / 58%);
+  transform: translateX(-50%);
+  animation: waveSlide 2.2s ease-in-out infinite alternate;
+}
+
+.countdown .liquid::after {
+  top: -8px;
+  background: rgb(255 255 255 / 28%);
+  animation-duration: 3s;
+  animation-direction: alternate-reverse;
+}
+
+.countdown #count {
+  position: relative;
+  z-index: 1;
+  color: var(--text);
+  text-shadow: 0 1px 10px rgb(255 255 255 / 52%);
+}
+
+.countdown #count.is-open {
+  color: rgb(245 252 255);
+  text-shadow:
+    0 1px 8px rgb(0 45 92 / 54%),
+    0 0 18px rgb(255 255 255 / 22%);
+  animation: openSlideIn 680ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.countdown::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgb(47 111 93 / 16%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.countdown[data-state="ready"] {
+  animation: glowPulse 2.8s ease-in-out infinite;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  min-height: 40px;
+  margin-top: 18px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.prompt.is-ready .actions,
+.settings .actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+button {
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  opacity: 1;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease,
+    opacity 160ms ease;
+}
+
+button:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}
+
+.primary {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--primary-text);
+  box-shadow: 0 10px 22px rgb(47 111 93 / 24%);
+}
+
+.secondary {
+  background: rgb(255 255 255 / 34%);
+  color: var(--text);
+}
+
+label {
+  display: block;
+  margin: 18px 0 8px;
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+textarea {
+  width: 100%;
+  min-height: 180px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px;
+  font: 15px/1.45 var(--font-mono);
+  color: var(--text);
+  background: var(--surface-strong);
+}
+
+.status {
+  min-height: 22px;
+  margin: 12px 0 0;
+  color: var(--primary);
+  font-weight: 400;
+}
+
+@keyframes flowGradient {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes flowDrift {
+  0% {
+    transform: translate3d(-3%, -2%, 0) rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: translate3d(4%, 3%, 0) rotate(8deg) scale(1.04);
+  }
+
+  100% {
+    transform: translate3d(-1%, 5%, 0) rotate(-5deg) scale(1.02);
+  }
+}
+
+@keyframes flowDriftReverse {
+  0% {
+    transform: translate3d(4%, 2%, 0) rotate(0deg) scale(1.02);
+  }
+
+  50% {
+    transform: translate3d(-3%, -4%, 0) rotate(-7deg) scale(1.05);
+  }
+
+  100% {
+    transform: translate3d(1%, -2%, 0) rotate(6deg) scale(1);
+  }
+}
+
+@keyframes glassSheen {
+  from {
+    opacity: 0.58;
+    transform: translate3d(-7%, -2%, 0) rotate(-1deg);
+  }
+
+  to {
+    opacity: 0.9;
+    transform: translate3d(7%, 2%, 0) rotate(1deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgb(47 111 93 / 18%),
+      0 16px 42px rgb(47 111 93 / 12%);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 14px rgb(47 111 93 / 0%),
+      0 22px 54px rgb(47 111 93 / 18%);
+  }
+}
+
+@keyframes openSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes liquidFill {
+  from {
+    height: 12%;
+  }
+
+  to {
+    height: 112%;
+  }
+}
+
+@keyframes liquidWave {
+  from {
+    border-radius: 46% 54% 0 0;
+    transform: translateX(-2%) rotate(-2deg);
+  }
+
+  to {
+    border-radius: 54% 46% 0 0;
+    transform: translateX(2%) rotate(2deg);
+  }
+}
+
+@keyframes waveSlide {
+  from {
+    transform: translateX(-54%) rotate(-2deg);
+  }
+
+  to {
+    transform: translateX(-46%) rotate(2deg);
+  }
+}
+
+@keyframes ripple {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.04);
+  }
+}
+
+@media (max-width: 430px) {
+  .page {
+    padding: 16px;
+  }
+
+  .prompt,
+  .settings {
+    padding: 26px;
+  }
+
+  .headline {
+    font-size: 28px;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-a: #1e2420;
+    --bg-b: #18362f;
+    --bg-c: #322c42;
+    --text: #f6f2ea;
+    --muted: #c0c8bd;
+    --line: rgb(255 255 255 / 20%);
+    --primary: #83d6b8;
+    --primary-text: #10211b;
+    --surface: rgb(20 35 46 / 24%);
+    --surface-strong: rgb(29 42 52 / 86%);
+    --shadow: 0 22px 70px rgb(0 0 0 / 32%);
+    --focus-ring: rgb(131 214 184 / 30%);
+    --flow-a: rgb(255 255 255 / 10%);
+    --flow-b: rgb(131 214 184 / 16%);
+    --flow-c: rgb(166 139 214 / 12%);
+    --live-glow: rgb(131 214 184 / 18%);
+  }
+
+  .secondary {
+    background: rgb(255 255 255 / 8%);
+  }
+
+  .prompt,
+  .settings {
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 18%), rgb(255 255 255 / 4%)),
+      radial-gradient(ellipse at 20% 0%, rgb(255 255 255 / 14%), transparent 44%),
+      var(--surface);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 30%),
+      inset 1px 0 0 rgb(255 255 255 / 10%),
+      inset -1px 0 0 rgb(255 255 255 / 8%),
+      inset 0 -28px 58px rgb(41 147 219 / 12%),
+      var(--shadow);
+  }
+
+  .prompt::before,
+  .settings::before {
+    background:
+      radial-gradient(ellipse at 18% 8%, rgb(255 255 255 / 24%), transparent 34%),
+      radial-gradient(ellipse at 84% 78%, rgb(75 168 255 / 22%), transparent 38%),
+      linear-gradient(115deg, transparent 18%, rgb(255 255 255 / 14%) 42%, transparent 58%);
+    opacity: 0.84;
+  }
+
+  .countdown .liquid {
+    background:
+      radial-gradient(ellipse at 30% 12%, rgb(255 255 255 / 30%), transparent 24%),
+      linear-gradient(180deg, rgb(64 174 244 / 78%), rgb(12 67 165 / 90%));
+  }
+
+  .countdown #count {
+    text-shadow: 0 1px 12px rgb(0 0 0 / 48%);
+  }
+}

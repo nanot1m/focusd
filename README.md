@@ -1,0 +1,89 @@
+# Focusd
+
+Focusd is a Chrome extension that adds a short pause before opening distracting websites.
+
+When you navigate to a configured domain, the tab is replaced with a calm interstitial. The water circle fills for three seconds, then becomes the button to continue. You can leave at any time.
+
+Default paused domains:
+
+- `x.com`
+- `instagram.com`
+
+## Screenshots
+
+![Focusd pause screen](screenshots/pause.png)
+
+![Focusd settings screen](screenshots/settings.png)
+
+## Features
+
+- Manifest V3 Chrome extension
+- Configurable domain list
+- Subdomain matching, for example `instagram.com` matches `www.instagram.com`
+- Three-second intentional pause before continuing
+- Animated ocean-style WebGPU water button
+- CSS fallback for browsers without WebGPU
+- Local settings page stored with `chrome.storage.sync`
+
+## Install
+
+1. Download or clone this repository.
+2. Open `chrome://extensions`.
+3. Enable **Developer mode**.
+4. Click **Load unpacked**.
+5. Select the project folder.
+
+## Configure Domains
+
+Click the Focusd extension icon to open settings.
+
+Add one domain per line:
+
+```text
+x.com
+instagram.com
+youtube.com
+```
+
+Do not include paths. Focusd normalizes entries such as `https://example.com/feed` to `example.com`.
+
+## How It Works
+
+Focusd listens for top-level navigations with `chrome.webNavigation`. If the destination hostname matches your pause list, the tab is redirected to the extension interstitial.
+
+The interstitial waits three seconds before enabling the water circle as the `Open` button. Choosing `Open` temporarily allows that exact navigation, then redirects the tab to the original URL.
+
+## Permissions
+
+Focusd uses:
+
+- `webNavigation` to detect top-level page navigation
+- `tabs` to redirect and continue the current tab
+- `storage` to save the domain list
+- `<all_urls>` host permission so it can compare navigated URLs against your configured domains
+
+## Development
+
+This extension is plain HTML, CSS, and JavaScript.
+
+Useful local checks:
+
+```sh
+node --check src/background.js
+node --check src/interstitial.js
+node --check src/options.js
+node --check src/water.js
+node -e "JSON.parse(require('fs').readFileSync('manifest.json', 'utf8'))"
+```
+
+For local browser preview:
+
+```sh
+python3 -m http.server 4173
+```
+
+Then open:
+
+```text
+http://localhost:4173/src/interstitial.html?target=https%3A%2F%2Fx.com%2Fhome
+```

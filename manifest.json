@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Focusd",
+  "version": "1.0.0",
+  "description": "Pause before opening distracting sites.",
+  "permissions": ["storage", "tabs", "webNavigation"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "options_page": "src/options.html",
+  "action": {
+    "default_title": "Focusd",
+    "default_popup": "src/options.html"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["src/interstitial.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
