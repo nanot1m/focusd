@@ -106,7 +106,6 @@ body {
   animation: fadeIn 520ms ease both;
 }
 
-.prompt::before,
 .settings::before {
   content: "";
   position: absolute;
@@ -664,7 +663,6 @@ textarea {
       var(--shadow);
   }
 
-  .prompt::before,
   .settings::before {
     background:
       radial-gradient(ellipse at 18% 8%, rgb(255 255 255 / 24%), transparent 34%),
