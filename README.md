@@ -62,9 +62,10 @@ The interstitial waits three seconds before enabling the water circle as the `Op
 Focusd uses:
 
 - `webNavigation` to detect top-level page navigation
-- `tabs` to redirect and continue the current tab
 - `storage` to save the domain list
 - `<all_urls>` host permission so it can compare navigated URLs against your configured domains
+
+Focusd uses the Chrome Tabs API only to update or close the current tab. It does not request the sensitive `tabs` permission.
 
 ## Development
 
