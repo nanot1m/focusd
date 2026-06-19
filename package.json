@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "build": "node scripts/build.js",
+    "validate": "node --check src/background.js && node --check src/interstitial.js && node --check src/options.js && node --check src/water.js && node -e \"JSON.parse(require('fs').readFileSync('manifest.json', 'utf8'))\""
+  },
+  "devDependencies": {}
+}

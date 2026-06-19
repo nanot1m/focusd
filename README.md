@@ -74,11 +74,13 @@ This extension is plain HTML, CSS, and JavaScript.
 Useful local checks:
 
 ```sh
-node --check src/background.js
-node --check src/interstitial.js
-node --check src/options.js
-node --check src/water.js
-node -e "JSON.parse(require('fs').readFileSync('manifest.json', 'utf8'))"
+npm run validate
+```
+
+Build a Chrome Web Store upload package:
+
+```sh
+npm run build
 ```
 
 For local browser preview:
