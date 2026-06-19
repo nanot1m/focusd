@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <radialGradient id="water" cx="35%" cy="22%" r="76%">
+      <stop offset="0%" stop-color="#8ee9ff"/>
+      <stop offset="42%" stop-color="#1686dc"/>
+      <stop offset="100%" stop-color="#064f91"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="18" y1="8" x2="104" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".92"/>
+      <stop offset="100%" stop-color="#d7f5ff" stop-opacity=".5"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="#e9f7f8"/>
+  <circle cx="64" cy="64" r="45" fill="url(#water)"/>
+  <path d="M25 59c12 7 24 7 38 0 16-8 28-6 40 2v-22H25z" fill="#9ff5ff" opacity=".84"/>
+  <circle cx="64" cy="64" r="48" fill="none" stroke="url(#glass)" stroke-width="6"/>
+  <path d="M44 85V42h31v8H54v11h18v8H54v16z" fill="#f7fcff"/>
+</svg>
