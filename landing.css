@@ -283,7 +283,8 @@ h1 {
 }
 
 .feature p,
-.split li {
+.split li,
+.install-copy {
   color: var(--muted);
 }
 
@@ -304,6 +305,19 @@ h1 {
 ol {
   margin: 24px 0 0;
   padding-left: 22px;
+}
+
+.install-copy {
+  margin: 18px 0 0;
+  max-width: 460px;
+  font-size: 18px;
+}
+
+.install-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
 }
 
 li + li {

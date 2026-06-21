@@ -31,7 +31,20 @@ Default paused domains:
 
 ## Install
 
-1. Download or clone this repository.
+Install Focusd from the Chrome Web Store:
+
+https://chromewebstore.google.com/detail/lnmhopjglpafaooeiapbhddpcpanogod
+
+1. Open the Chrome Web Store listing.
+2. Click **Add to Chrome**.
+3. Pin Focusd from the extensions menu if you want quick access.
+4. Open Focusd settings and edit your pause list.
+
+### Developer Install
+
+Use this only if you want to run the local source directly:
+
+1. Clone this repository.
 2. Open `chrome://extensions`.
 3. Enable **Developer mode**.
 4. Click **Load unpacked**.
